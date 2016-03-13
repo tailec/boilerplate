@@ -1,0 +1,18 @@
+source 'https://github.com/CocoaPods/Specs'
+
+platform :ios, '8.0'
+use_frameworks!
+
+target 'github' do
+    pod 'RxSwift', '~> 2.0'
+    pod 'RxCocoa', '~> 2.0'
+    pod 'Moya/RxSwift'
+    pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
+end
+
+target :unit_tests, :exclusive => true do
+  link_with 'githubTests'
+  pod 'Quick', '~> 0.8.0'
+  pod 'Nimble', '3.0.0'
+  pod 'RxBlocking', '~> 2.0'
+end
