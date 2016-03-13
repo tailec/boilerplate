@@ -6,10 +6,10 @@ This repository demonstrates different architectures and usage of popular reacti
 
 I decided to open-source couple of small apps (3-6 screens) with very basic UI. I hope, these projects will save someone else's time.
 
-Currently, only [GitHub API Client](#GitHub API client) is available. Rest of the apps will be published very soon!
+Currently, only [GitHub API Client](#github-api-client) is available. Rest of the apps will be published very soon!
 
 
-1. [GitHub API Client](#GitHub API client) - MVVM and RxSwift
+1. [GitHub API Client](#github-api-client) - MVVM and RxSwift
 2. *500px photo viewer app - VIPER and RxSwift - March 2016*
 3. *TBA - mix of MVVM and VIPER by Florent Pillet ([@fpillet](https://twitter.com/fpillet)) and RxSwift - April 2016*
 4. *TODO List - MVVM and SwiftBond - April 2016*
