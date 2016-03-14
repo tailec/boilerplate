@@ -25,6 +25,7 @@
 		5396E3011C9755A9008A0794 /* PullRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5396E3001C9755A9008A0794 /* PullRequestSpec.swift */; };
 		5396E3031C975620008A0794 /* IssueSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5396E3021C975620008A0794 /* IssueSpec.swift */; };
 		5396E3051C9757A7008A0794 /* CommitSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5396E3041C9757A7008A0794 /* CommitSpec.swift */; };
+		5396E3071C975881008A0794 /* DecodableRxSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5396E3061C975881008A0794 /* DecodableRxSpec.swift */; };
 		539B32891C90D776002681A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539B32881C90D776002681A0 /* AppDelegate.swift */; };
 		539B328E1C90D776002681A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 539B328C1C90D776002681A0 /* Main.storyboard */; };
 		539B32901C90D776002681A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 539B328F1C90D776002681A0 /* Assets.xcassets */; };
@@ -76,6 +77,7 @@
 		5396E3001C9755A9008A0794 /* PullRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullRequestSpec.swift; sourceTree = "<group>"; };
 		5396E3021C975620008A0794 /* IssueSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueSpec.swift; sourceTree = "<group>"; };
 		5396E3041C9757A7008A0794 /* CommitSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommitSpec.swift; sourceTree = "<group>"; };
+		5396E3061C975881008A0794 /* DecodableRxSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodableRxSpec.swift; sourceTree = "<group>"; };
 		539B32851C90D776002681A0 /* github.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = github.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		539B32881C90D776002681A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		539B328D1C90D776002681A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			children = (
 				5396E2FA1C974A98008A0794 /* Models */,
 				539B329F1C90D776002681A0 /* Info.plist */,
+				5396E3061C975881008A0794 /* DecodableRxSpec.swift */,
 			);
 			path = githubTests;
 			sourceTree = "<group>";
@@ -527,6 +530,7 @@
 				5396E3051C9757A7008A0794 /* CommitSpec.swift in Sources */,
 				5396E3011C9755A9008A0794 /* PullRequestSpec.swift in Sources */,
 				5396E3031C975620008A0794 /* IssueSpec.swift in Sources */,
+				5396E3071C975881008A0794 /* DecodableRxSpec.swift in Sources */,
 				5396E2FD1C974AB9008A0794 /* RepoSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
