@@ -20,11 +20,15 @@
 		533E02C01C9459BC006B4F15 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533E02BF1C9459BC006B4F15 /* SearchViewModel.swift */; };
 		533E02C21C9459C9006B4F15 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533E02C11C9459C9006B4F15 /* SearchViewController.swift */; };
 		5387F2AE1C9364A4001A2551 /* DiscoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5387F2AD1C9364A4001A2551 /* DiscoverViewModel.swift */; };
+		5396E2FD1C974AB9008A0794 /* RepoSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5396E2FC1C974AB9008A0794 /* RepoSpec.swift */; };
+		5396E2FF1C974B0E008A0794 /* OwnerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5396E2FE1C974B0E008A0794 /* OwnerSpec.swift */; };
+		5396E3011C9755A9008A0794 /* PullRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5396E3001C9755A9008A0794 /* PullRequestSpec.swift */; };
+		5396E3031C975620008A0794 /* IssueSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5396E3021C975620008A0794 /* IssueSpec.swift */; };
+		5396E3051C9757A7008A0794 /* CommitSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5396E3041C9757A7008A0794 /* CommitSpec.swift */; };
 		539B32891C90D776002681A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539B32881C90D776002681A0 /* AppDelegate.swift */; };
 		539B328E1C90D776002681A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 539B328C1C90D776002681A0 /* Main.storyboard */; };
 		539B32901C90D776002681A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 539B328F1C90D776002681A0 /* Assets.xcassets */; };
 		539B32931C90D776002681A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 539B32911C90D776002681A0 /* LaunchScreen.storyboard */; };
-		539B329E1C90D776002681A0 /* githubTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539B329D1C90D776002681A0 /* githubTests.swift */; };
 		539B32AC1C91FAC0002681A0 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539B32AB1C91FAC0002681A0 /* LoginViewModel.swift */; };
 		539B32AE1C91FAC8002681A0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539B32AD1C91FAC8002681A0 /* LoginViewController.swift */; };
 		539B32B11C91FB08002681A0 /* GitHubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539B32B01C91FB08002681A0 /* GitHubAPI.swift */; };
@@ -67,6 +71,11 @@
 		533E02BF1C9459BC006B4F15 /* SearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		533E02C11C9459C9006B4F15 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		5387F2AD1C9364A4001A2551 /* DiscoverViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewModel.swift; sourceTree = "<group>"; };
+		5396E2FC1C974AB9008A0794 /* RepoSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoSpec.swift; sourceTree = "<group>"; };
+		5396E2FE1C974B0E008A0794 /* OwnerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnerSpec.swift; sourceTree = "<group>"; };
+		5396E3001C9755A9008A0794 /* PullRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullRequestSpec.swift; sourceTree = "<group>"; };
+		5396E3021C975620008A0794 /* IssueSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueSpec.swift; sourceTree = "<group>"; };
+		5396E3041C9757A7008A0794 /* CommitSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommitSpec.swift; sourceTree = "<group>"; };
 		539B32851C90D776002681A0 /* github.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = github.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		539B32881C90D776002681A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		539B328D1C90D776002681A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -74,7 +83,6 @@
 		539B32921C90D776002681A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		539B32941C90D776002681A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		539B32991C90D776002681A0 /* githubTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = githubTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		539B329D1C90D776002681A0 /* githubTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = githubTests.swift; sourceTree = "<group>"; };
 		539B329F1C90D776002681A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		539B32AB1C91FAC0002681A0 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		539B32AD1C91FAC8002681A0 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +141,18 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		5396E2FA1C974A98008A0794 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5396E2FC1C974AB9008A0794 /* RepoSpec.swift */,
+				5396E2FE1C974B0E008A0794 /* OwnerSpec.swift */,
+				5396E3001C9755A9008A0794 /* PullRequestSpec.swift */,
+				5396E3021C975620008A0794 /* IssueSpec.swift */,
+				5396E3041C9757A7008A0794 /* CommitSpec.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		539B327C1C90D776002681A0 = {
 			isa = PBXGroup;
 			children = (
@@ -174,7 +194,7 @@
 		539B329C1C90D776002681A0 /* githubTests */ = {
 			isa = PBXGroup;
 			children = (
-				539B329D1C90D776002681A0 /* githubTests.swift */,
+				5396E2FA1C974A98008A0794 /* Models */,
 				539B329F1C90D776002681A0 /* Info.plist */,
 			);
 			path = githubTests;
@@ -503,7 +523,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				539B329E1C90D776002681A0 /* githubTests.swift in Sources */,
+				5396E2FF1C974B0E008A0794 /* OwnerSpec.swift in Sources */,
+				5396E3051C9757A7008A0794 /* CommitSpec.swift in Sources */,
+				5396E3011C9755A9008A0794 /* PullRequestSpec.swift in Sources */,
+				5396E3031C975620008A0794 /* IssueSpec.swift in Sources */,
+				5396E2FD1C974AB9008A0794 /* RepoSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -647,10 +671,12 @@
 			baseConfigurationReference = E975B9A4358CE075CE35994C /* Pods-unit_tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = githubTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tailec.githubTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/github.app/github";
 			};
 			name = Debug;
@@ -660,6 +686,7 @@
 			baseConfigurationReference = A63EBE6BF86598AA4AA40F31 /* Pods-unit_tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = githubTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tailec.githubTests;
