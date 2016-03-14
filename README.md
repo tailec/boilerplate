@@ -58,7 +58,7 @@ open github.xcworkspace
 ##Author
 Pawel Krawiec
 
-* [www.tailec.com](www.tailec.com)
+* [www.tailec.com](http://www.tailec.com)
 * [@tailectailec](https://twitter.com/tailectailec)
 
 ##Licence
