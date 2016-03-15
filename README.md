@@ -44,11 +44,15 @@ More information can be found [here](https://developer.github.com/v3/oauth_autho
 [Upcoming features and code checklist](Docs/Github-upcoming-features-and-code-checklist.md)
 
 ###Setup
+Cocoapods version 0.39
 ```
 cd github
 pod install
 open github.xcworkspace
 ```
+Cocoapods version 1.x
+Open Podfile and enable Cocoapods 1.0 part and run commands above
+
 
 ##Thanks
 * [@ashfurrow](https://twitter.com/ashfurrow) and [@orta](https://twitter.com/orta) for [Moya](https://github.com/Moya/Moya), [C-41](https://github.com/ashfurrow/C-41), [Kiosk](https://github.com/artsy/eidolon)
