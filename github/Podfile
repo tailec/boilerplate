@@ -17,6 +17,7 @@ target :unit_tests, :exclusive => true do
   pod 'Quick', '~> 0.8.0'
   pod 'Nimble', '3.0.0'
   pod 'RxBlocking', '~> 2.0'
+  pod 'RxTests', '~> 2.2'
 end
 
 

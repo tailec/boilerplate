@@ -80,15 +80,15 @@ extension GitHub: TargetType {
         case .Token(_, _):
             return "Half measures are as bad as nothing at all.".dataUsingEncoding(NSUTF8StringEncoding)!
         case .RepoSearch(_):
-            return "Half measures are as bad as nothing at all.".dataUsingEncoding(NSUTF8StringEncoding)!
+            return StubResponse.fromJSONFile("SearchResponse")
         case .TrendingReposSinceLastWeek:
-            return "Half measures are as bad as nothing at all.".dataUsingEncoding(NSUTF8StringEncoding)!
+            return StubResponse.fromJSONFile("SearchResponse")
         case .Repo(_,_):
             return "Half measures are as bad as nothing at all.".dataUsingEncoding(NSUTF8StringEncoding)!
         case .RepoReadMe(_,_):
             return "Half measures are as bad as nothing at all.".dataUsingEncoding(NSUTF8StringEncoding)!
         case .Pulls(_,_):
-            return "Half measures are as bad as nothing at all.".dataUsingEncoding(NSUTF8StringEncoding)!
+            return "[{\"title\": \"Avatar\", \"user\": { \"login\": \"me\" }, \"createdAt\": \"2011-01-26T19:01:12Z\" }]".dataUsingEncoding(NSUTF8StringEncoding)!
         case .Issues(_,_):
             return "Half measures are as bad as nothing at all.".dataUsingEncoding(NSUTF8StringEncoding)!
         case .Commits(_,_):
