@@ -39,7 +39,8 @@ More information can be found [here](https://developer.github.com/v3/oauth_autho
 * Implements RxSwift custom operators
 * Implements RxSwift helper operators for [Moya](https://github.com/Moya/Moya)
 * Uses [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON)
-* Unit tests for models and services
+* Models and services unit tests
+* **ViewModels unit tests using [RxBlocking](https://github.com/ReactiveX/RxSwift/tree/master/RxBlocking) and [RxTests](https://github.com/ReactiveX/RxSwift/tree/master/RxTests)**
 
 
 [Upcoming features and code checklist](Docs/Github-upcoming-features-and-code-checklist.md)

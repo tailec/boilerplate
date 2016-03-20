@@ -12,7 +12,7 @@
 ### Code checklist
 
 * [ ] Avoid duplication in view controllers and view models
-* [ ] Unit tests for view models
+* [x] Unit tests for view models
 * [x] Unit tests for models and services
 * [ ] Better error handling
 * [ ] Descriptions for errors which actually mean something :)
