@@ -25,9 +25,7 @@ class LoginViewController: UIViewController {
         _ = signInButton.rx_tap.bindTo(viewModel.loginTaps).addDisposableTo(disposeBag)
         
         viewModel.loginEnabled
-            .driveNext { [weak self] enabled in
-                self?.signInButton.enabled = enabled
-            }
+            .drive(signInButton.rx_enabled)
             .addDisposableTo(disposeBag)
         
         viewModel.loginExecuting
