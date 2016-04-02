@@ -10,7 +10,7 @@ Currently, only [GitHub API Client](#github-api-client) is available. Rest of th
 
 
 1. [GitHub API Client](#github-api-client) - MVVM and RxSwift
-2. *500px photo viewer app - VIPER and RxSwift - March 2016*
+2. *500px photo viewer app - VIPER and RxSwift - April 2016*
 3. *TBA - mix of MVVM and VIPER by Florent Pillet ([@fpillet](https://twitter.com/fpillet)) and RxSwift - April 2016*
 4. *TODO List - MVVM and SwiftBond - April 2016*
 5. *Commits app - MVVM and ReactiveCocoa - Coming soon*
