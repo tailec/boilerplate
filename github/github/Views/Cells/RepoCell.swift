@@ -11,13 +11,13 @@ import UIKit
 class RepoCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak private var descriptionLabel: UILabel!
-    @IBOutlet weak private var languageLabel: UILabel!
-    @IBOutlet weak private var starsLabel: UILabel!
+    @IBOutlet weak fileprivate var descriptionLabel: UILabel!
+    @IBOutlet weak fileprivate var languageLabel: UILabel!
+    @IBOutlet weak fileprivate var starsLabel: UILabel!
     
-    @IBOutlet weak private var starsLabelLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak fileprivate var starsLabelLeadingConstraint: NSLayoutConstraint!
     
-    func configure(title: String, description: String, language: String, stars: String) {
+    func configure(_ title: String, description: String, language: String, stars: String) {
         titleLabel.text = title
         descriptionLabel.text = description
         languageLabel.text = language

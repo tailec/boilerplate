@@ -11,7 +11,7 @@ private struct ModelMock {
 }
 
 extension ModelMock: Decodable {
-    static func fromJSON(json: AnyObject) -> ModelMock {
+    static func fromJSON(_ json: AnyObject) -> ModelMock {
         let json = JSON(json)
         let something = json["something"].stringValue
         return ModelMock(something: something)
@@ -25,7 +25,7 @@ class DecodableRxSpec: QuickSpec {
             it("should map to one model") {
                 let json = "{\"something\": \"else\"}"
                 
-                let sut = try! Observable.just(Response(statusCode: 200, data: json.dataUsingEncoding(NSUTF8StringEncoding)!))
+                let sut = try! Observable.just(Response(statusCode: 200, data: json.data(using: String.Encoding.utf8)!))
                     .mapToModel(ModelMock.self)
                     .toBlocking()
                     .first()
@@ -36,7 +36,7 @@ class DecodableRxSpec: QuickSpec {
             it("should map to multiple models") {
                 let json = "[{\"something\": \"else\"}, {\"something\": \"oops\"}]"
                 
-                let sut = try! Observable.just(Response(statusCode: 200, data: json.dataUsingEncoding(NSUTF8StringEncoding)!))
+                let sut = try! Observable.just(Response(statusCode: 200, data: json.data(using: String.Encoding.utf8)!))
                     .mapToModels(ModelMock.self)
                     .toBlocking()
                     .first()
@@ -48,7 +48,7 @@ class DecodableRxSpec: QuickSpec {
             it("should map to multiple models with provided array root key") {
                 let json = "{\"items\": [{\"something\": \"else\"}, {\"something\": \"oops\"}]}"
                 
-                let sut = try! Observable.just(Response(statusCode: 200, data: json.dataUsingEncoding(NSUTF8StringEncoding)!))
+                let sut = try! Observable.just(Response(statusCode: 200, data: json.data(using: String.Encoding.utf8)!))
                     .mapToModels(ModelMock.self, arrayRootKey: "items")
                     .toBlocking()
                     .first()

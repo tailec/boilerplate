@@ -3,7 +3,7 @@ import SwiftyJSON
 
 struct Repo {
     let id: Int
-    let createdAt: NSDate
+    let createdAt: Date
     let fullName: String
     let description: String
     let language: String?
@@ -14,18 +14,18 @@ struct Repo {
 }
 
 extension Repo: Decodable {
-    static func fromJSON(json: AnyObject) -> Repo {
+    static func fromJSON(_ json: AnyObject) -> Repo {
         let json = JSON(json)
         
         let id = json["id"].intValue
-        let createdAt = NSDate(fromGitHubString: json["created_at"].stringValue)
+        let createdAt = Date(fromGitHubString: json["created_at"].stringValue)
         let fullName = json["full_name"].stringValue
         let description = json["description"].stringValue
         let language = json["language"].string
         let stargazers = json["stargazers_count"].intValue
         let forks = json["forks"].intValue
-        let type = json["fork"].boolValue ? UserRepoType.Fork : UserRepoType.Source
-        let owner = Owner.fromJSON(json["onwer"].object)
+        let type = json["fork"].boolValue ? UserRepoType.fork : UserRepoType.source
+        let owner = Owner.fromJSON(json["onwer"].object as AnyObject)
         
         return Repo(id: id,
             createdAt: createdAt,
@@ -40,17 +40,17 @@ extension Repo: Decodable {
 }
 
 enum UserRepoType  {
-    case Fork
-    case Source
+    case fork
+    case source
 }
 
 extension UserRepoType: Equatable {}
 
 func == (lhs: UserRepoType, rhs: UserRepoType) -> Bool {
     switch (lhs,rhs) {
-    case (.Fork, .Fork):
+    case (.fork, .fork):
         return true
-    case (.Source, .Source):
+    case (.source, .source):
         return true
     default:
         return false

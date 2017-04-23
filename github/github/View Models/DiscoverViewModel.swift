@@ -6,7 +6,7 @@ import Moya
 class DiscoverViewModel {
     
     var triggerRefresh = PublishSubject<Void>()
-    var selectedItem = PublishSubject<NSIndexPath>()
+    var selectedItem = PublishSubject<IndexPath>()
     
     let results: Driver<[RepoCellViewModel]>
     let noResultsFound: Driver<Bool>
@@ -14,14 +14,14 @@ class DiscoverViewModel {
     let selectedViewModel: Observable<RepositoryViewModel>
     let title = "Trending"
     
-    private let repos: Variable<[Repo]>
-    private let provider: RxMoyaProvider<GitHub>
+    fileprivate let repos: Variable<[Repo]>
+    fileprivate let provider: RxMoyaProvider<GitHub>
     
     init(provider: RxMoyaProvider<GitHub>) {
         self.provider = provider
         
-        let activityIndicator = ActivityIndicator()
-        self.executing = activityIndicator.asDriver().distinctUntilChanged()
+//        let activityIndicator = ActivityIndicator()
+        self.executing = Variable(false).asDriver().distinctUntilChanged()
 
         let noResultFoundSubject = Variable(false)
         self.noResultsFound = noResultFoundSubject.asDriver().distinctUntilChanged()
@@ -31,21 +31,21 @@ class DiscoverViewModel {
         
         results = triggerRefresh.startWith(())
             .flatMapLatest {
-                provider.request(.TrendingReposSinceLastWeek)
+                provider.request(.trendingReposSinceLastWeek)
                     .retry(3)
                     .observeOn(MainScheduler.instance)
-                    .trackActivity(activityIndicator)
+//                    .trackActivity(activityIndicator)
             }
             .mapJSON()
             .mapToRepos()
-            .doOnNext {
-                repos.value = $0
-            }
+            .do(onNext: { (res) in
+                repos.value = res
+            })
             .mapToRepoCellViewModels()
             .catchErrorJustReturn([])
-            .doOnNext {  viewModels in
+            .do(onNext: { (viewModels) in
                 noResultFoundSubject.value = viewModels.isEmpty
-            }
+            })
             .asDriver(onErrorJustReturn: [])
         
         selectedViewModel = selectedItem.asObservable()

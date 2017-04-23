@@ -6,7 +6,7 @@ extension ObservableType where E == Response {
     func checkIfAuthenticated() -> Observable<E> {
         return self.map { response in
             guard response.statusCode != 403 || response.statusCode != 404 else {
-                throw GithubError.NotAuthenticated
+                throw GithubError.notAuthenticated
             }
             return response
         }
@@ -14,16 +14,16 @@ extension ObservableType where E == Response {
     
     func checkIfRateLimitExceeded() -> Observable<E> {
         return self.map { response -> E in
-            guard let httpResponse = response.response as? NSHTTPURLResponse else {
-                throw GithubError.Generic
+            guard let httpResponse = response.response as? HTTPURLResponse else {
+                throw GithubError.generic
             }
         
             guard let remainingCount = httpResponse.allHeaderFields["X-RateLimit-Remaining"] else {
-                throw GithubError.Generic
+                throw GithubError.generic
             }
             
-            guard remainingCount.integerValue! != 0 else {
-                throw GithubError.RateLimitExceeded
+            guard (remainingCount as AnyObject).integerValue! != 0 else {
+                throw GithubError.rateLimitExceeded
             }
             return response
         }
@@ -35,7 +35,7 @@ extension ObservableType where E == Response {
         return self.mapJSON()
             .map { json -> [T] in
                 guard let array = json as? [AnyObject] else {
-                    throw GithubError.WrongJSONParsing
+                    throw GithubError.wrongJSONParsing
 
                 }
                 return T.fromJSONArray(array)
@@ -49,7 +49,7 @@ extension ObservableType where E == Response {
                     let subJson = dict[arrayRootKey] {
                         return T.fromJSONArray(subJson as! [AnyObject])
                 } else {
-                    throw GithubError.WrongJSONParsing
+                    throw GithubError.wrongJSONParsing
                 }
         }
     }
@@ -57,7 +57,7 @@ extension ObservableType where E == Response {
     func mapToModel<T: Decodable>(_: T.Type) -> Observable<T> {
         return self.mapJSON()
             .map { json -> T in
-                return T.fromJSON(json)
+                return T.fromJSON(json as AnyObject)
         }
     }
 }

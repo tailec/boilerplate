@@ -3,10 +3,10 @@ import Foundation
 struct Token {
     var token: String? {
         get {
-            return userDefaults.stringForKey(UserDefaultsKeys.Token.rawValue)
+            return userDefaults.string(forKey: UserDefaultsKeys.Token.rawValue)
         }
         set {
-            userDefaults.setObject(newValue, forKey: UserDefaultsKeys.Token.rawValue)
+            userDefaults.set(newValue, forKey: UserDefaultsKeys.Token.rawValue)
             userDefaults.synchronize()
         }
     }
@@ -19,16 +19,16 @@ struct Token {
         }
     }
     
-    private let userDefaults: NSUserDefaults
+    fileprivate let userDefaults: UserDefaults
     
-    private enum UserDefaultsKeys: String {
+    fileprivate enum UserDefaultsKeys: String {
         case Token = "TokenKey"
     }
     
-    init(userDefaults: NSUserDefaults) {
+    init(userDefaults: UserDefaults) {
         self.userDefaults = userDefaults
     }
     init() {
-        self.userDefaults = NSUserDefaults.standardUserDefaults()
+        self.userDefaults = UserDefaults.standard
     }
 }

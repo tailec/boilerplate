@@ -13,8 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        window = UIWindow(frame: UIScreen.main.bounds)
         if let window = window {
             let provider = GitHubProvider
             
@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if !appToken.tokenExists {
                 let loginViewController = UIStoryboard.main.loginViewController
                 loginViewController.viewModel = LoginViewModel(provider: provider)
-                window.rootViewController?.presentViewController(loginViewController, animated: false, completion: nil)
+                window.rootViewController?.present(loginViewController, animated: false, completion: nil)
             }
         }
         return true

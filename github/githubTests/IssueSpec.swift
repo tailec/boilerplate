@@ -10,7 +10,7 @@ class IssueSpec: QuickSpec {
                 "user" : [
                     "login" : "john",
                 ],
-                "createdAt" : "2008-11-14T03:57:43Z"]
+                "createdAt" : "2008-11-14T03:57:43Z"] as [String : Any]
             beforeEach {
                 sut = Issue.fromJSON(json)
             }
@@ -34,7 +34,7 @@ class IssueSpec: QuickSpec {
                     components.minute = 57
                     components.second = 43
                     
-                    let date = NSCalendar.currentCalendar().dateFromComponents(components)
+                    let date = NSCalendar.currentCalendar.dateFromComponents(components)
                     expect(sut.date) == date
                 }
             }

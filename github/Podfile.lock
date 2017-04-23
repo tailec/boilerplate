@@ -1,52 +1,41 @@
 PODS:
-  - Alamofire (3.2.1)
-  - Moya/Core (6.2.0):
-    - Alamofire (~> 3.0)
-    - Result (~> 1.0)
-  - Moya/RxSwift (6.2.0):
+  - Alamofire (4.4.0)
+  - Moya/Core (8.0.3):
+    - Alamofire (~> 4.1)
+    - Result (~> 3.0)
+  - Moya/RxSwift (8.0.3):
     - Moya/Core
-    - RxSwift (~> 2.0)
-  - Nimble (3.0.0)
-  - Quick (0.8.0)
-  - Result (1.0.2)
-  - RxBlocking (2.2.0):
-    - RxSwift (~> 2.2)
-  - RxCocoa (2.2.0):
-    - RxSwift (~> 2.2)
-  - RxSwift (2.2.0)
-  - RxTests (2.2.0):
-    - RxSwift (~> 2.2)
-  - SwiftyJSON (2.3.2)
+    - RxSwift (~> 3.0)
+  - Nimble (6.1.0)
+  - Quick (1.1.0)
+  - Result (3.2.1)
+  - RxBlocking (3.4.0):
+    - RxSwift (~> 3.4)
+  - RxCocoa (3.4.0):
+    - RxSwift (~> 3.4)
+  - RxSwift (3.4.0)
+  - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
-  - Moya/RxSwift
-  - Nimble (= 3.0.0)
-  - Quick (~> 0.8.0)
-  - RxBlocking (~> 2.0)
-  - RxCocoa (~> 2.0)
-  - RxSwift (~> 2.0)
-  - RxTests (~> 2.2)
-  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
-
-EXTERNAL SOURCES:
-  SwiftyJSON:
-    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
-
-CHECKOUT OPTIONS:
-  SwiftyJSON:
-    :commit: 42bdb102d2624b143c07850ebdc1537d5b6579b6
-    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+  - Moya/RxSwift (= 8.0.3)
+  - Nimble (= 6.1.0)
+  - Quick (= 1.1.0)
+  - RxBlocking (= 3.4.0)
+  - RxCocoa (= 3.4.0)
+  - RxSwift (= 3.4.0)
+  - SwiftyJSON (= 3.1.4)
 
 SPEC CHECKSUMS:
-  Alamofire: f11d8624a05f5d39e0c99309b3e600a3ba64298a
-  Moya: a5e57a405584177027daab240f4d47baa0722562
-  Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
-  Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
-  Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
-  RxBlocking: 5bbc826774c4290effa8fe070841e9d45e864639
-  RxCocoa: 42efb7a7145a8d1d5878e94ce48a580d29e0c796
-  RxSwift: b8a749f2204c6c7a5c29b306a9c3bc11d5b87c5b
-  RxTests: bff19d036313b8f9bbfcc8e2f9ae436dffc7093f
-  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Moya: d3721622e3cc0cc2f038d69a258686f0b66e7252
+  Nimble: c53e6903fee94041b90ded74f135820437d8bf59
+  Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
+  Result: 2453a22e5c5b11c0c3a478736e82cd02f763b781
+  RxBlocking: 1797b8c1a3ad7b08965145e6e2294c2e101515aa
+  RxCocoa: d14ef6b6029e1ddc6e966508c09289090de68ff9
+  RxSwift: 3789a1af753002a14edecdb698a2424624296a9c
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 9322cab3050bf1a1f5a0557bf04d163362d1fc92
+
+COCOAPODS: 1.2.0

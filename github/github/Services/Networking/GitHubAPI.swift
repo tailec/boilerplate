@@ -5,118 +5,128 @@ import RxSwift
 let GitHubProvider = RxMoyaProvider<GitHub>(endpointClosure: endpointClosure)
 
 public enum GitHub {
-    case Token(username: String, password: String)
-    case RepoSearch(query: String)
-    case TrendingReposSinceLastWeek
-    case Repo(owner: String, repoName: String)
-    case RepoReadMe(owner: String, repoName: String)
-    case Pulls(onwer: String, repo: String)
-    case Issues(onwer: String, repo: String)
-    case Commits(onwer: String, repo: String)
+    case token(username: String, password: String)
+    case repoSearch(query: String)
+    case trendingReposSinceLastWeek
+    case repo(owner: String, repoName: String)
+    case repoReadMe(owner: String, repoName: String)
+    case pulls(onwer: String, repo: String)
+    case issues(onwer: String, repo: String)
+    case commits(onwer: String, repo: String)
 }
 
 extension GitHub: TargetType {
-    public var baseURL: NSURL { return NSURL(string: "https://api.github.com")! }
-    
+    public var baseURL: URL {
+        return URL(string: "https://api.github.com")!
+    }
+
     public var path: String {
         switch self {
-        case .Token(_, _):
+        case .token(_, _):
             return "/authorizations"
-        case .RepoSearch(_),
-        .TrendingReposSinceLastWeek:
+        case .repoSearch(_),
+             .trendingReposSinceLastWeek:
             return "/search/repositories"
-        case Repo(let owner, let repoName):
+        case .repo(let owner, let repoName):
             return "/repos\(owner)/\(repoName)"
-        case RepoReadMe(let owner, let repoName):
+        case .repoReadMe(let owner, let repoName):
             return "/repos\(owner)/\(repoName)/readme"
-        case Pulls(let owner, let repo):
+        case .pulls(let owner, let repo):
             return "/repos\(owner)/\(repo)/pulls"
-        case Issues(let owner, let repo):
+        case .issues(let owner, let repo):
             return "/repos\(owner)/\(repo)/issues"
-        case Commits(let owner, let repo):
+        case .commits(let owner, let repo):
             return "/repos\(owner)/\(repo)/commits"
         }
     }
 
     public var method: Moya.Method {
         switch self {
-        case .Token(_, _):
-            return .POST
-        case .RepoSearch(_),
-        .TrendingReposSinceLastWeek,
-        .Repo(_,_),
-        .RepoReadMe(_,_),
-        .Pulls(_,_),
-        .Issues(_,_),
-        .Commits(_,_):
-            return .GET
+        case .token(_, _):
+            return .post
+        case .repoSearch(_),
+             .trendingReposSinceLastWeek,
+             .repo(_,_),
+             .repoReadMe(_,_),
+             .pulls(_,_),
+             .issues(_,_),
+             .commits(_,_):
+            return .get
         }
     }
     
-    public var parameters: [String: AnyObject]? {
+    public var parameters: [String: Any]? {
         switch self {
-        case .Token(_, _):
+        case .token(_, _):
             return [
                 "scopes": ["public_repo", "user"],
-                "note": "Ori iOS app (\(NSDate()))"
+                "note": "Ori iOS app (\(Date()))"
             ]
-        case Repo(_,_),
-        RepoReadMe(_,_),
-        Pulls,
-        Issues,
-        Commits:
+        case .repo(_,_),
+        .repoReadMe(_,_),
+        .pulls,
+        .issues,
+        .commits:
             return nil
-        case .RepoSearch(let query):
-            return ["q": query.URLEscapedString]
-        case .TrendingReposSinceLastWeek:
-            return ["q" : "created:>" + NSDate().lastWeek(),
-                "sort" : "stars",
-                "order" : "desc"]
+        case .repoSearch(let query):
+            return ["q": query.URLEscapedString as AnyObject]
+        case .trendingReposSinceLastWeek:
+            return ["q" : "created:>" + Date().lastWeek(),
+                    "sort" : "stars",
+                    "order" : "desc"]
         }
     }
+
+    public var parameterEncoding: ParameterEncoding {
+        return URLEncoding.default
+    }
     
-    public var sampleData: NSData {
+    public var sampleData: Data {
         switch self {
-        case .Token(_, _):
-            return "Half measures are as bad as nothing at all.".dataUsingEncoding(NSUTF8StringEncoding)!
-        case .RepoSearch(_):
+        case .token(_, _):
+            return "Half measures are as bad as nothing at all.".data(using: String.Encoding.utf8)!
+        case .repoSearch(_):
             return StubResponse.fromJSONFile("SearchResponse")
-        case .TrendingReposSinceLastWeek:
+        case .trendingReposSinceLastWeek:
             return StubResponse.fromJSONFile("SearchResponse")
-        case .Repo(_,_):
-            return "Half measures are as bad as nothing at all.".dataUsingEncoding(NSUTF8StringEncoding)!
-        case .RepoReadMe(_,_):
-            return "Half measures are as bad as nothing at all.".dataUsingEncoding(NSUTF8StringEncoding)!
-        case .Pulls(_,_):
-            return "[{\"title\": \"Avatar\", \"user\": { \"login\": \"me\" }, \"createdAt\": \"2011-01-26T19:01:12Z\" }]".dataUsingEncoding(NSUTF8StringEncoding)!
-        case .Issues(_,_):
-            return "Half measures are as bad as nothing at all.".dataUsingEncoding(NSUTF8StringEncoding)!
-        case .Commits(_,_):
-            return "Half measures are as bad as nothing at all.".dataUsingEncoding(NSUTF8StringEncoding)!
+        case .repo(_,_):
+            return "Half measures are as bad as nothing at all.".data(using: String.Encoding.utf8)!
+        case .repoReadMe(_,_):
+            return "Half measures are as bad as nothing at all.".data(using: String.Encoding.utf8)!
+        case .pulls(_,_):
+            return "[{\"title\": \"Avatar\", \"user\": { \"login\": \"me\" }, \"createdAt\": \"2011-01-26T19:01:12Z\" }]".data(using: String.Encoding.utf8)!
+        case .issues(_,_):
+            return "Half measures are as bad as nothing at all.".data(using: String.Encoding.utf8)!
+        case .commits(_,_):
+            return "Half measures are as bad as nothing at all.".data(using: String.Encoding.utf8)!
         }
+    }
+
+    public var task: Task {
+        return .request
     }
 }
 
 var endpointClosure = { (target: GitHub) -> Endpoint<GitHub> in
-    let url = target.baseURL.URLByAppendingPathComponent(target.path).absoluteString
-    let endpoint: Endpoint<GitHub> = Endpoint(URL: url, sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
+    let url = target.baseURL.appendingPathComponent(target.path).absoluteString
+    let endpoint: Endpoint<GitHub> = Endpoint(url: url, sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
     switch target {
-    case .Token(let userString, let passwordString):
-        let credentialData = "\(userString):\(passwordString)".dataUsingEncoding(NSUTF8StringEncoding)!
-        let base64Credentials = credentialData.base64EncodedStringWithOptions([])
-        return endpoint.endpointByAddingHTTPHeaderFields(["Authorization": "Basic \(base64Credentials)"])
-            .endpointByAddingParameterEncoding(.JSON)
+    case .token(let userString, let passwordString):
+        let credentialData = "\(userString):\(passwordString)".data(using: String.Encoding.utf8)!
+        let base64Credentials = credentialData.base64EncodedString(options: [])
+        return endpoint.adding(newHTTPHeaderFields: ["Authorization": "Basic \(base64Credentials)"])
+            .adding(newParameterEncoding: JSONEncoding.default)
     default:
         let appToken = Token()
         guard let token = appToken.token else {
             return endpoint
         }
-        return endpoint.endpointByAddingHTTPHeaderFields(["Authorization": "token \(token)"])
+        return endpoint.adding(newHTTPHeaderFields: ["Authorization": "token \(token)"])
     }
 }
 
 private extension String {
     var URLEscapedString: String {
-        return self.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())!
+        return self.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed)!
     }
 }
