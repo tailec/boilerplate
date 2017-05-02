@@ -1,7 +1,7 @@
 
 ![The Tin Woodman of Oz](https://openclipart.org/image/200px/svg_to_png/184586/the-tin-woodsman.png)
 
-#boilerplate
+#boilerplate [![codebeat](https://codebeat.co/badges/256b8082-7bd9-41c4-a93e-1ea9e297bc79)](https://codebeat.co/projects/github-com-tailec-boilerplate)
 This repository demonstrates different architectures and usage of popular reactive programming frameworks.
 
 I decided to open-source couple of small apps (3-6 screens) with very basic UI. I hope, these projects will save someone else's time.
