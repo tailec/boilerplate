@@ -1,15 +1,15 @@
 enum LoginResult {
-    case OK
-    case Failed(message: String)
+    case ok
+    case failed(message: String)
 }
 
 extension LoginResult: Equatable {}
 
 func == (lhs: LoginResult, rhs: LoginResult) -> Bool {
     switch (lhs,rhs) {
-    case (.OK, .OK):
+    case (.ok, .ok):
         return true
-    case (.Failed(let x), .Failed(let y))
+    case (.failed(let x), .failed(let y))
         where x == y:
         return true
     default:

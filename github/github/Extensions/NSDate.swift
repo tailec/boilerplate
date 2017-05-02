@@ -1,26 +1,26 @@
 import Foundation
 
-extension NSDate {
+extension Date {
     func lastWeek() -> String {
-        let lastWeek = NSCalendar.currentCalendar().dateByAddingUnit(.WeekOfYear, value: -1, toDate: NSDate(), options: NSCalendarOptions())
-        let formatter = NSDateFormatter()
+        let lastWeek = (Calendar.current as NSCalendar).date(byAdding: .weekOfYear, value: -1, to: Date(), options: NSCalendar.Options())
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.stringFromDate(lastWeek!)
+        return formatter.string(from: lastWeek!)
     }
     
-    func daysFrom(date: NSDate) -> Int {
-        let components = NSCalendar.currentCalendar().components(NSCalendarUnit.Day, fromDate: date, toDate: self, options: NSCalendarOptions())
-        return components.day
+    func daysFrom(_ date: Date) -> Int {
+        let components = (Calendar.current as NSCalendar).components(NSCalendar.Unit.day, from: date, to: self, options: NSCalendar.Options())
+        return components.day!
     }
 }
 
-extension NSDate {
-    convenience init(fromGitHubString gitHubString: String) {
-        let dateFormatter = NSDateFormatter()
+extension Date {
+    init(fromGitHubString gitHubString: String) {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ssXXX"
         
-        if let date = dateFormatter.dateFromString(gitHubString) {
-            self.init(timeInterval: 0, sinceDate: date)
+        if let date = dateFormatter.date(from: gitHubString) {
+            self.init(timeInterval: 0, since: date)
         } else {
             self.init()
         }

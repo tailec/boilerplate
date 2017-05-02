@@ -1,8 +1,8 @@
 import Foundation
 
-enum GithubError: ErrorType {
-    case NotAuthenticated
-    case RateLimitExceeded
-    case WrongJSONParsing
-    case Generic
+enum GithubError: Error {
+    case notAuthenticated
+    case rateLimitExceeded
+    case wrongJSONParsing
+    case generic
 }

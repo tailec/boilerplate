@@ -14,11 +14,11 @@ class RepositoryViewModel {
     var forksCounts: String { return String(repo.forks) }
     var starsCount: String { return String(repo.stargazers) }
     
-    let readMeURLObservable: Observable<NSURL>
+    let readMeURLObservable: Observable<URL>
     let dataObservable: Driver<[RepositorySectionViewModel]> // naming is hard
     
-    private let provider: RxMoyaProvider<GitHub>
-    private let repo: Repo
+    fileprivate let provider: RxMoyaProvider<GitHub>
+    fileprivate let repo: Repo
     
     init(provider: RxMoyaProvider<GitHub>, repo: Repo) {
         self.provider = provider
@@ -27,7 +27,7 @@ class RepositoryViewModel {
         readMeURLObservable = readMeTaps
             .asObservable()
             .flatMap { _ in
-                GitHubProvider.request(GitHub.RepoReadMe(owner: repo.owner.name, repoName: repo.fullName))
+                GitHubProvider.request(GitHub.repoReadMe(owner: repo.owner.name, repoName: repo.fullName))
                     .retry(3)
                     .observeOn(MainScheduler.instance)
             }
@@ -36,36 +36,36 @@ class RepositoryViewModel {
                 JSON($0)
             }
             .map { json in
-                NSURL(string: json["html_url"].stringValue)!
+                URL(string: json["html_url"].stringValue)!
             }
 
             .shareReplay(1)
         
-        let lastThreePullsObservable =  provider.request(GitHub.Pulls(onwer: repo.owner.name, repo: repo.fullName))
+        let lastThreePullsObservable =  provider.request(GitHub.pulls(onwer: repo.owner.name, repo: repo.fullName))
             .mapToModels(PullRequest.self)
             .asDriver(onErrorJustReturn: [])
             .map { (models: [PullRequest]) -> RepositorySectionViewModel in
-                let items = models.prefix(3).map {
+                let items = models.prefix(upTo: 3).map {
                     RepositoryCellViewModel(title: $0.title, subtitle: "by " + $0.author)
                 }
                 return RepositorySectionViewModel(header: "Last three pull requests", items: items)
             }
         
-        let lastThreeIssuesObservable =  provider.request(GitHub.Issues(onwer: repo.owner.name, repo: repo.fullName))
+        let lastThreeIssuesObservable =  provider.request(GitHub.issues(onwer: repo.owner.name, repo: repo.fullName))
             .mapToModels(Issue.self)
             .asDriver(onErrorJustReturn: [])
             .map { (models: [Issue]) -> RepositorySectionViewModel in
-                let items = models.prefix(3).map {
+                let items = models.prefix(upTo: 3).map {
                     RepositoryCellViewModel(title: $0.title, subtitle: "by " + $0.author)
                 }
                 return RepositorySectionViewModel(header: "Last three issues", items: items)
             }
         
-        let lastThreeCommitsObservable =  provider.request(GitHub.Commits(onwer: repo.owner.name, repo: repo.fullName))
+        let lastThreeCommitsObservable = provider.request(GitHub.commits(onwer: repo.owner.name, repo: repo.fullName))
             .mapToModels(Commit.self)
             .asDriver(onErrorJustReturn: [])
             .map { (models: [Commit]) -> RepositorySectionViewModel in
-                let items = models.prefix(3).map {
+                let items = models.prefix(upTo: 3).map {
                     RepositoryCellViewModel(title: $0.message, subtitle: "by " + $0.author)
                 }
                 return RepositorySectionViewModel(header: "Last three commits", items: items)

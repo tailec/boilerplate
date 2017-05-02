@@ -7,11 +7,11 @@ class LoginViewController: UIViewController {
     
     var viewModel: LoginViewModel!
     
-    @IBOutlet weak private var usernameTextField: UITextField!
-    @IBOutlet weak private var passwordTextField: UITextField!
-    @IBOutlet weak private var signInButton: UIButton!
+    @IBOutlet weak fileprivate var usernameTextField: UITextField!
+    @IBOutlet weak fileprivate var passwordTextField: UITextField!
+    @IBOutlet weak fileprivate var signInButton: UIButton!
     
-    private let disposeBag = DisposeBag()
+    fileprivate let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,32 +20,28 @@ class LoginViewController: UIViewController {
     }
     
     func bindToRx() {
-        _ = usernameTextField.rx_text.bindTo(viewModel.username).addDisposableTo(disposeBag)
-        _ = passwordTextField.rx_text.bindTo(viewModel.password).addDisposableTo(disposeBag)
-        _ = signInButton.rx_tap.bindTo(viewModel.loginTaps).addDisposableTo(disposeBag)
+        usernameTextField.rx.text.orEmpty.bind(to: viewModel.username).addDisposableTo(disposeBag)
+        passwordTextField.rx.text.orEmpty.bind(to: viewModel.password).addDisposableTo(disposeBag)
+        signInButton.rx.tap.bind(to: viewModel.loginTaps).addDisposableTo(disposeBag)
         
         viewModel.loginEnabled
-            .drive(signInButton.rx_enabled)
+            .drive(signInButton.rx.isEnabled)
             .addDisposableTo(disposeBag)
         
-        viewModel.loginExecuting
-            .driveNext { executing in
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = executing
-            }
-            .addDisposableTo(disposeBag)
+        viewModel.loginExecuting.drive(onNext: { (executing) in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = executing
+        }).addDisposableTo(disposeBag)
         
-        viewModel.loginFinished
-            .driveNext { [weak self] loginResult in
+        viewModel.loginFinished.drive(onNext: { [weak self] loginResult in
             switch loginResult {
-                case .Failed(let message):
-                    let alert = UIAlertController(title: "Oops!", message:message, preferredStyle: .Alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
-                    self?.presentViewController(alert, animated: true, completion: nil)
-                case .OK:
-                    self?.dismissViewControllerAnimated(true, completion: nil)
-                }
+            case .failed(let message):
+                let alert = UIAlertController(title: "Oops!", message:message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in })
+                self?.present(alert, animated: true, completion: nil)
+            case .ok:
+                self?.dismiss(animated: true, completion: nil)
             }
-            .addDisposableTo(disposeBag)
+        }).addDisposableTo(disposeBag)
     }
     
     func dismissKeyboard() {
@@ -55,7 +51,7 @@ class LoginViewController: UIViewController {
 
 // MARK: UI stuff
 extension LoginViewController {
-    private func customizeSignInButton() {
+    fileprivate func customizeSignInButton() {
         signInButton.layer.cornerRadius = 6.0
         signInButton.layer.masksToBounds = true
     }

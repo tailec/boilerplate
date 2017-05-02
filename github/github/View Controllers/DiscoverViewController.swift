@@ -7,11 +7,11 @@ class DiscoverViewController: UIViewController {
     
     var viewModel: DiscoverViewModel?
     
-    @IBOutlet weak private var tableView: UITableView!
-    @IBOutlet weak private var noResultsView: UIView!
-    private let refreshControl = UIRefreshControl()
+    @IBOutlet weak fileprivate var tableView: UITableView!
+    @IBOutlet weak fileprivate var noResultsView: UIView!
+    fileprivate let refreshControl = UIRefreshControl()
     
-    private let disposeBag = DisposeBag()
+    fileprivate let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,64 +26,58 @@ class DiscoverViewController: UIViewController {
         title = vm.title
         tabBarItem.title = vm.title
         
-        tableView.rx_itemSelected
-            .bindTo(vm.selectedItem)
+        tableView.rx.itemSelected
+            .bind(to: vm.selectedItem)
             .addDisposableTo(disposeBag)
         
-        vm.results.drive(tableView.rx_itemsWithCellFactory) {
-            (tv: UITableView, index, rowViewModel: RepoCellViewModel) in
-                let indexPath = NSIndexPath(forItem: index, inSection: 0)
-                let cell = tv.dequeueReusableCellWithIdentifier(String(RepoCell), forIndexPath: indexPath) as! RepoCell
-                cell.configure(rowViewModel.fullName, description: rowViewModel.description, language: rowViewModel.language, stars: rowViewModel.stars)
-                return cell
-            }
-            .addDisposableTo(disposeBag)
+//        vm.results.drive(tableView.rx.itemsWithCellFactory) {
+//            (tv: UITableView, index, rowViewModel: RepoCellViewModel) in
+//                let indexPath = NSIndexPath(forItem: index, inSection: 0)
+//                let cell = tv.dequeueReusableCellWithIdentifier(String(RepoCell), forIndexPath: indexPath) as! RepoCell
+//                cell.configure(rowViewModel.fullName, description: rowViewModel.description, language: rowViewModel.language, stars: rowViewModel.stars)
+//                return cell
+//            }
+//            .addDisposableTo(disposeBag)
+
+        vm.results.drive(onNext: { [weak self] _ in
+            self?.refreshControl.endRefreshing()
+        }).addDisposableTo(disposeBag)
         
-        vm.results
-            .driveNext { [weak self] _ in
-                self?.refreshControl.endRefreshing()
-            }
-            .addDisposableTo(disposeBag)
-        
-        vm.executing
-            .driveNext { executing in
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = executing
-            }
-            .addDisposableTo(disposeBag)
+        vm.executing.drive(onNext: { executing in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = executing
+        }).addDisposableTo(disposeBag)
         
         vm.noResultsFound
             .map { !$0 }
-            .drive(noResultsView.rx_hidden)
+            .drive(noResultsView.rx.isHidden)
             .addDisposableTo(disposeBag)
         
-        vm.selectedViewModel
-            .subscribeNext { [weak self] repoViewModel in
-                let repositoryViewController = UIStoryboard.main.repositoryViewController
-                repositoryViewController.viewModel = repoViewModel
-                self?.showViewController(repositoryViewController, sender: nil)
-            }
-            .addDisposableTo(disposeBag)
+        vm.selectedViewModel.subscribe(onNext: { [weak self] repoViewModel in
+            let repositoryViewController = UIStoryboard.main.repositoryViewController
+            repositoryViewController.viewModel = repoViewModel
+            self?.show(repositoryViewController, sender: nil)
+        }).addDisposableTo(disposeBag)
         
         let tapGestureRecognizer = UITapGestureRecognizer()
         noResultsView.addGestureRecognizer(tapGestureRecognizer)
         
-        _ = Observable.of(refreshControl.rx_animating.asObservable(), tapGestureRecognizer.rx_event.map { _ in () })
+        _ = Observable.of(refreshControl.rx_animating.asObservable(), tapGestureRecognizer.rx.event.map { _ in () })
             .merge()
-            .bindTo(vm.triggerRefresh)
+            .bind(to: vm.triggerRefresh)
             .addDisposableTo(disposeBag)
         
     }
     
-    private func configureTableView() {
-        tableView.registerNib(UINib(nibName: String(RepoCell), bundle: nil), forCellReuseIdentifier: String(RepoCell))
+    fileprivate func configureTableView() {
+        tableView.register(UINib(nibName: String(describing: RepoCell.self), bundle: nil), forCellReuseIdentifier: String(describing: RepoCell.self))
         tableView.tableFooterView = UIView() // Removes separators in empty cells
         tableView.estimatedRowHeight = 100.0;
         tableView.rowHeight = UITableViewAutomaticDimension;
     }
     
-    private func configureRefreshControl() {
-        refreshControl.backgroundColor = UIColor.clearColor()
-        refreshControl.tintColor = UIColor.lightGrayColor()
+    fileprivate func configureRefreshControl() {
+        refreshControl.backgroundColor = UIColor.clear
+        refreshControl.tintColor = UIColor.lightGray
         tableView.addSubview(refreshControl)
     }
 }

@@ -8,7 +8,7 @@ struct Owner {
 }
 
 extension Owner: Decodable {
-    static func fromJSON(json: AnyObject) -> Owner {
+    static func fromJSON(_ json: AnyObject) -> Owner {
         let json = JSON(json)
         
         let id = json["id"].intValue

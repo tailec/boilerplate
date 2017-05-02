@@ -12,7 +12,7 @@ class RepoSpec: QuickSpec {
                 "description" : "nice repo",
                 "stargazers_count" : 42,
                 "forks" : 1,
-                "fork" : false]
+                "fork" : false] as [String : Any]
             beforeEach {
                 sut = Repo.fromJSON(json)
             }
@@ -31,7 +31,7 @@ class RepoSpec: QuickSpec {
                     components.minute = 57
                     components.second = 43
                     
-                    let date = NSCalendar.currentCalendar().dateFromComponents(components)
+                    let date = NSCalendar.currentCalendar.dateFromComponents(components)
                     expect(sut.createdAt) == date
                 }
                 it("should have valid full name") {
